@@ -1,4 +1,5 @@
 # Electric magi
+<img src="./ElectricMagiタイトル画像.png" width="480" height="300">
 
 プロダクトの種類：
 シリアスゲーム
