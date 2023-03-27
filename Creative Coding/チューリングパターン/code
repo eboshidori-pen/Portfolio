@@ -1,1 +1,175 @@
+float s = 4;
+color c0 = color(55,101,174);
+color c1 = color(217,235,136);
 
+float wn, hn = 0;
+
+int check1, check2 = 0;
+
+void setup() {
+  size(900, 900);
+  background(255);
+
+  noStroke();
+  noLoop();
+}
+
+void draw() {
+  background(255);
+
+  wn = width/(s * 2);
+  hn = height/((s/2)*sqrt(3))+1;
+
+  float x2 = 0;
+
+  int[][] checkColor;
+  checkColor = new int[countx(wn)][county(hn)];
+  colorRandom(checkColor);
+
+  for(int n = 0; n < 4; n++){
+    for(int j = 0; j < hn; j++){
+      for(int i = 0; i < wn; i++){
+        check1(checkColor,i,j);
+        check2(checkColor,i,j);
+      }
+    }
+  }
+
+  for(int j = 0; j < hn; j++){
+    for(int i = 0; i < wn; i++){
+      if(checkColor[i][j] == 0){
+        fill(c0);
+      }else if(checkColor[i][j] == 1){
+        fill(c1);
+      }
+
+
+
+      hex(i *(s * 3) + x2, j * ((s/2)*sqrt(3)), s);
+ 
+    }
+    if(j % 2 == 0){
+      x2 = s * 1.5;
+    }else{
+      x2 = 0;
+    }
+  }
+}
+
+void hex(float hx, float hy, float hs){
+  pushMatrix();
+  translate(hx,hy);
+  beginShape();
+  for(int i = 0; i < 6; i++) {
+    vertex(hs*cos(radians(360 * i/6)), hs*sin(radians(360 * i/6)));
+  }
+  endShape(CLOSE);
+  popMatrix();
+}
+
+
+
+//void mousePressed(){
+  //s = random(10,150);
+//}
+
+
+void colorRandom(int array[][]){
+  for(int j = 0; j < county(hn); j++){
+    for(int i = 0; i < countx(wn); i++){
+      array[i][j] = int(random(0,2));
+      //println(array[i][j]);
+    }
+  }
+}
+
+void check1(int array[][],int i, int j){
+  check1 = 0;
+  if(j % 2 == 0){
+    if(i-1 > 0){
+      if(j-1 > 0) check1 = check1 + array[i-1][j-1];
+      if(j+1 < county(hn)) check1 = check1 + array[i-1][j+1];
+    }
+    if(j-2 > 0) check1 = check1 + array[i][j-2];
+    if(j-1 > 0) check1 = check1 + array[i][j-1];
+    if(j+1 < county(hn)) check1 = check1 + array[i][j+1];
+    if(j+2 < county(hn)) check1 = check1 + array[i][j+2];
+  }else{
+    if(i+1 < countx(wn)){
+      if(j-1 > 0) check1 = check1 + array[i+1][j-1];
+      if(j+1 < county(hn)) check1 = check1 + array[i+1][j+1];
+    }
+    if(j-1 > 0) check1 = check1 + array[i][j-1];
+    if(j-2 > 0) check1 = check1 + array[i][j-2];
+    if(j+2 < county(hn)) check1 = check1 + array[i][j+2];
+    if(j+1 < county(hn)) check1 = check1 + array[i][j+1];
+  }
+
+  if(check1 >= 4){
+    array[i][j] = 0;
+    println(check1);
+    println(array[i][j]);
+  }else if(check1 <=2){
+    array[i][j] = 1;
+  }
+}
+
+
+void check2(int array[][],int i, int j){
+  check2 = 0;
+  if(j % 2 == 0){
+    if(j-4 > 0) check2 = check2 + array[i][j-4];
+    if(j-3 > 0) check2 = check2 + array[i][j-3];
+    if(i+1 < countx(wn) && j-2 > 0) check2 = check2 + array[i+1][j-2];
+    if(i+ 1 < countx(wn)) check2 = check2 + array[i+1][j];
+    if(i+1 < countx(wn) && j+2 < county(hn)) check2 = check2 + array[i+1][j+2];
+    if(j+3 < county(hn)) check2 = check2 + array[i][j+3];
+    if(j+4 < county(hn)) check2 = check2 + array[i][j+4];
+    if(i-1 > 0 && j+3 < county(hn)) check2 = check2 + array[i-1][j+3];
+    if(i-1 > 0 && j+2 < county(hn)) check2 = check2 + array[i-1][j+2];
+    if(i-1 > 0) check2 = check2 + array[i-1][j];
+    if(i-1 > 0 && j-2 > 0) check2 = check2 + array[i-1][j-2];
+    if(i-1 > 0 && j-3 > 0) check2 = check2 + array[i-1][j-3];
+  }else{
+    if(j-4 > 0) check2 = check2 + array[i][j-4];
+    if(i+1 < countx(wn) && j-4 > 0) check2 = check2 + array[i+1][j-3];
+    if(i+1 < countx(wn) && j-2 > 0) check2 = check2 + array[i+1][j-2];
+    if(i+1 < countx(wn)) check2 = check2 + array[i+1][j];
+    if(i+1 < countx(wn) && j+2 < county(hn)) check2 = check2 + array[i+1][j+2];
+    if(i+1 < countx(wn) && j+3 < county(hn)) check2 = check2 + array[i+1][j+3];
+    if(j+4 < county(hn)) check2 = check2 + array[i][j+4];
+    if(j+3 < county(hn)) check2 = check2 + array[i][j+3];
+    if(i-1 > 0 && j+2 < county(hn)) check2 = check2 + array[i-1][j+2];
+    if(i-1 > 0) check2 = check2 + array[i-1][j];
+    if(i-1 > 0 && j-2 > 0) check2 = check2 + array[i-1][j-2];
+    if(j-3 > 0) check2 = check2 + array[i][j-3];
+  }
+  check2 = check2 + check1;
+
+  if(array[i][j] == 0 && check2 == 0){
+    array[i][j] = 1;
+  }else if(array[i][j] == 1 && check2 == 18){
+    array[i][j] = 0;
+  }
+}
+
+
+int countx(float cwn){
+  int cx = 0;
+
+  for(int i = 0; i < cwn; i++){
+    cx = cx + 1;
+  }
+
+  return cx;
+}
+
+int county(float chn){
+  int cy = 0;
+
+  for(int j = 0; j < chn; j++){
+    cy = cy + 1;
+  }
+
+  return cy;
+}
