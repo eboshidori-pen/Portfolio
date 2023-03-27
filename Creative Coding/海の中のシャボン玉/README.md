@@ -9,5 +9,5 @@
 processing
 
 ### **補足**  
->Processing Community Japanのイベントで、「七夕」をテーマに作りました。
->random()やnoise()を組み合わせて天の川を表現しました。
+>Processing Community Japanでのイベントで販売された、Tシャツデザインを行いました。
+>海に浮かぶシャボン玉を表現しました。ピンクのシャボン玉には花が、ブルーのシャボン玉には星空が入り込んでいます。
