@@ -1,6 +1,6 @@
 # 海の中のシャボン玉
 ### **作品画像** 
-<img src="./七夕.png" width="500" height="500">
+<img src="./PCD2021_eboshidori.png" width="500" height="500">
 
 ### **作成日**  
 2020年7月4日
